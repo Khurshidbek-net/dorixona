@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update Medicine</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f9;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 50px auto;
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        .form-group textarea {
+            resize: none;
+        }
+
+        .btn-submit {
+            display: block;
+            width: 100%;
+            background-color: #4CAF50;
+            color: #fff;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            font-size: 18px;
+            cursor: pointer;
+        }
+
+        .btn-submit:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Dorini yangilash</h1>
+        <form action="/api/medicines/<%= medicine.id %>?_method=PUT" method="POST">
+            <div class="form-group">
+                <label for="name">Dori nomi</label>
+                <input type="text" id="name" name="name" value="<%= medicine.name %>" required>
+            </div>
+
+            <div class="form-group">
+                <label for="manufacturer">Ishlab chiqaruchi</label>
+                <input type="text" id="manufacturer" name="manufacturer" value="<%= medicine.manufacturer %>" required>
+            </div>
+
+            <div class="form-group">
+                <label for="medicine_type_id">Dori turi</label>
+                <select id="medicine_type_id" name="medicine_type_id" required>
+                    <% medicineTypes.forEach(type => { %>
+                        <option value="<%= type.id %>" <%= type.id === medicine.medicine_type_id ? 'selected' : '' %>>
+                            <%= type.name %>
+                        </option>
+                    <% }) %>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="price">Narxi</label>
+                <input type="number" id="price" name="price" value="<%= medicine.price %>" required>
+            </div>
+
+            <div class="form-group">
+                <label for="expiry_date">Muddati</label>
+                <input type="date" id="expiry_date" name="expiry_date" value="<%=(medicine.expiry_date).toLocaleDateString() %>" required>
+            </div>
+
+            <div class="form-group">
+                <label for="info">Dori haqida ma'lumot</label>
+                <textarea id="info" name="info" rows="3"><%= medicine.info %></textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="quantity">Quantity</label>
+                <input type="number" id="quantity" name="quantity" value="<%= medicine.quantity %>" required>
+            </div>
+
+            <button type="submit" class="btn-submit">Update Medicine</button>
+        </form>
+    </div>
+</body>
+</html>

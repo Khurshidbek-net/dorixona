@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 50px auto;
+            padding: 20px;
+            background: #ffffff;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+        
+        .title {
+            text-align: center;
+            color: #333;
+            margin-bottom: 20px;
+            font-size: 32px;
+            font-weight: 800;
+            color: crimson;
+        }
+        
+        .pharmacy-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        
+        .card { 
+            background: #ffffff;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            transition: transform 0.2s, box-shadow 0.2s;
+            cursor: pointer;
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            background-color: rgba(4, 193, 102, 0.169);
+        }
+        
+        .card h2 {
+            margin: 0 0 10px;
+            font-size: 20px;
+            color: #4CAF50;
+        }
+        
+        .card p {
+            margin: 5px 0;
+            color: #555;
+            font-size: 14px;
+        }
+
+        .btn{
+            text-align: right;
+            margin-top: 50px;
+        }
+
+        a{
+            margin-right: 150px;
+            padding: 10px 20px;
+            border: none;
+            background-color: #4caf66;
+            color: white;
+            font-weight: 800;
+            cursor: pointer;
+            font-size: 15px;
+            text-decoration: none;
+        }
+
+        a:hover{
+            border-radius: 10px;
+            background-color: #257b3c; 
+        }
+    </style>
+</head>
+<body>
+    <div class="btn">
+        <a href="/api/pharmacies/add/pharmacy/<%= districtId %>">Yangi dorixona qo'shish</a>
+    </div>
+    <div class="container">
+        <h1 class="title">Dorixonalar</h1>
+        <div class="pharmacy-cards">
+            <% pharmacies.forEach(pharmacy => { %>
+                <div class="card" onclick="handlePharmacyClick('<%= pharmacy.id %>', '<%= pharmacy.name %>')">
+                    <h2 class="pharmacy-name"><%= pharmacy.name %></h2>
+                    <p><strong>Address:</strong> <%= pharmacy.address %></p>
+                    <p><strong>Phone:</strong> <%= pharmacy.phone %></p>
+                    <p><strong>Email:</strong> <%= pharmacy.email %></p>
+                </div>
+            <% }) %>
+        </div>
+    </div>
+
+    <script>
+        function handlePharmacyClick(pharmacyId, name){
+            window.location.href = `/api/medicines/${pharmacyId}/medicines/${name}`;
+        }
+    </script>
+</body>
+
+</html>

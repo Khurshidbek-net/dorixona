@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pharmacies</title>
+    <link rel="stylesheet" href="/styles.css">
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 50px auto;
+            padding: 20px;
+            background: #ffffff;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+        
+        .title {
+            text-align: center;
+            color: #333;
+            margin-bottom: 20px;
+            font-size: 32px;
+            font-weight: 800;
+            color: crimson;
+        }
+        
+        .pharmacy-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        
+        .card { 
+            background: #ffffff;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            transition: transform 0.2s, box-shadow 0.2s;
+            cursor: pointer;
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            background-color: rgba(4, 193, 102, 0.169);
+        }
+        
+        .card h2 {
+            margin: 0 0 10px;
+            font-size: 20px;
+            color: #4CAF50;
+        }
+        
+        .card p {
+            margin: 5px 0;
+            color: #555;
+            font-size: 14px;
+        }
+
+
+
+
+
+
+
+
+
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        .container-drop {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        ul li {
+            background-color: #fff;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 250px;
+            text-align: center;
+            cursor: pointer;
+            transition: transform 0.3s ease-in-out;
+        }
+
+        ul li:hover {
+            transform: translateY(-5px);
+        }
+
+        .drop-down {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            max-width: 500px;
+            margin: 40px auto;
+            text-align: center;
+        }
+
+        .drop-down h1 {
+            margin-bottom: 20px;
+            font-size: 24px;
+        }
+
+        select {
+            width: 100%;
+            padding: 12px;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+            font-size: 16px;
+            margin-bottom: 20px;
+        }
+
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+
+        
+    </style>
+</head>
+<body>
+
+    <div class="container-drop">
+        <h1>Viloyat va Tumanni tanlang</h1>
+        <form action="/api/pharmacies" method="POST">
+            <select name="region_id" id="region_select">
+                <option value="">Tanlang</option>
+                <option value="1">Toshkent shahri</option>
+                <option value="2">Toshkent viloyati</option>
+                <option value="3">Samarqand viloyati</option>
+                <option value="4">Farg‘ona viloyati</option>
+                <option value="5">Andijon viloyati</option>
+                <option value="6">Namangan viloyati</option>
+                <option value="7">Buxoro viloyati</option>
+                <option value="8">Qashqadaryo viloyati</option>
+                <option value="9">Surxondaryo viloyati</option>
+                <option value="10">Jizzax viloyati</option>
+                <option value="11">Sirdaryo viloyati</option>
+                <option value="12">Navoiy viloyati</option>
+                <option value="13">Xorazm viloyati</option>
+                <option value="14">Qoraqalpog‘iston Respublikasi</option>
+            </select>
+
+            <button type="submit" name="submit_region">Viloyatni tanlang</button>
+        </form>
+        <ul>
+            <% districts.forEach(district => { %>
+                <li onclick="getDistrictId('<%= district.id %>')"><%= district.name %></li>
+            <% }) %>
+        </ul>
+    </div>
+
+
+    <div class="container">
+        <h1 class="title">Dorixonalar</h1>
+        <div class="pharmacy-cards">
+            <% pharmacies.forEach(pharmacy => { %>
+                <div class="card" onclick="handlePharmacyClick('<%= pharmacy.id %>', '<%= pharmacy.name %>')">
+                    <h2 class="pharmacy-name"><%= pharmacy.name %></h2>
+                    <p><strong>Address:</strong> <%= pharmacy.address %></p>
+                    <p><strong>Phone:</strong> <%= pharmacy.phone %></p>
+                    <p><strong>Email:</strong> <%= pharmacy.email %></p>
+                </div>
+            <% }) %>
+        </div>
+    </div>
+    <script>
+        function handlePharmacyClick(pharmacyId, name){
+            window.location.href = `/api/medicines/${pharmacyId}/medicines/${name}`;
+        }
+
+        function getDistrictId(id){
+            window.location.href = `/api/pharmacies/region/${id}`;
+        }
+    </script>
+</body>
+</html>

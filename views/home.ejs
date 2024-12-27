@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css" integrity="sha512-5Hs3dF2AEPkpNAR7UiOHba+lRSJNeM2ECkwxUIxC1Q/FLycGTbNapWXB4tP889k5T5Ju8fs4b1P5z/iB4nMfSQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+
+        .container{
+            display: flex;
+            letter-spacing: 5px;
+        }
+        .container a{
+            margin: 0 auto;
+            padding: 30px 100px;
+            text-decoration: none;
+            color: rgb(2, 41, 58);
+            font-size: 40px;
+            font-weight: 800;
+            border-radius: 10px;
+            transition: all 0.3s ease-in-out;
+            background: linear-gradient(to right, rgb(70, 244, 163), rgb(51, 154, 245));
+            box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
+        }
+
+        .container a:hover{
+            transform: scale(1.03);
+        }
+        h2{
+            margin-top: 200px;
+            text-align: center;
+            font-size: 40px;
+            letter-spacing: 5px;
+            color: rgb(7, 165, 99);
+            text-shadow: 7px 7px 12px rgba(2,220,72,0.41);      
+        }
+
+        i{
+            font-weight: 900;
+            font-size: 30px;
+            margin-left: 10px;
+            animation: slide 1.5s infinite;
+        }
+
+        @keyframes slide {
+            0% {
+                transform: translateX(0);
+            }
+            50% {
+                transform:  translateX(30px);
+            }
+            100% {
+                transform:  translateX(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="main">
+        <h2>O'zbekitondagi barcha dorixonalar</h2>
+        <div class="container">
+            <a href="http://localhost:5000/api/pharmacies">Dorixonalar <i class="fa-solid fa-arrow-right"></i></a>
+        </div>
+    </div>
+</body>
+</html>

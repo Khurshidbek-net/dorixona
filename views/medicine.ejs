@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Medicines</title>
+    <link rel="stylesheet">
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 50px auto;
+            padding: 20px;
+            background: #ffffff;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+        
+        .title {
+            text-align: center;
+            color: #07a08b;
+            margin-bottom: 20px;
+            font-size: 32px;
+            font-weight: 800;
+        }
+        
+        .medicine-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        
+        .card {
+            background: #ffffff;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            background: #e6f4ee;
+        }
+        
+        .card h2 {
+            margin: 0 0 10px;
+            font-size: 22px;
+            color: #4CAF50;
+        }
+        
+        .card p {
+            margin: 5px 0;
+            color: #555;
+            font-size: 14px;
+        }
+        
+        .card p strong {
+            color: #333;
+        }
+
+        .btn{
+            text-align: right;
+            margin-top: 50px;
+        }
+
+        a{
+            margin-right: 150px;
+            padding: 10px 20px;
+            border: none;
+            background-color: #4caf66;
+            color: white;
+            font-weight: 800;
+            cursor: pointer;
+            font-size: 15px;
+            text-decoration: none;
+        }
+
+        a:hover{
+            border-radius: 10px;
+            background-color: #257b3c; 
+        }
+
+        .card-buttons{
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .btn{
+            padding: 8px 40px;
+            border: none;
+            color: white;
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+        }
+
+        .btn-update{
+            background-color: rgb(244, 141, 8);
+        }
+
+        .btn-update:hover{
+            border-radius: 10px;
+            background-color: rgba(180, 101, 6, 0.913);
+        }
+
+        .btn-delete{
+            background-color: rgb(255, 0, 0);
+        }   
+
+        .btn-delete:hover{
+            background-color: rgb(186, 4, 4);
+            border-radius: 10px;
+        }
+        
+    </style>
+</head>
+<body>
+    <div class="btn">
+        <a href="/api/medicines/add/medicine/<%= pharmacyId %>">Yangi dori qo'shish</a>
+    </div>
+    <div class="container">
+        <h1 class="title">"<%= name %>" - dorixonasidagi mavjud dorilar</h1>
+        <div class="medicine-cards">
+            <% medicines.forEach(medicine => { %>
+                <div class="card">
+                    <h2 class="medicine-name"><%= medicine.name %></h2>
+                    <p><strong>Ishlab chiqaruvchi:</strong> <%= medicine.manufacturer %></p>
+                    <p><strong>Narxi:</strong> <%= medicine.price %> so'm</p>
+                    <p><strong>Muddati:</strong> <%= new Date(medicine.expiry_date).toLocaleDateString() %></p>
+                    <p><strong>Ma'lumot:</strong> <%= medicine.info %></p>
+                    <p><strong>Miqdori:</strong> <%= medicine.quantity %></p>
+                    <div class="card-buttons">
+                        <form action="/api/medicines/<%= medicine.medicine_id %>" method="GET" >
+                            <button class="btn btn-update">Update</button>
+                        </form>
+                        <form action="/api/medicines/<%= medicine.medicine_id %>?_method=DELETE" method="POST">
+                            <button type="submit" class="btn btn-delete">Delete</button>
+                        </form>
+                    </div>
+                </div>
+            <% }) %>
+        </div>
+    </div>
+</body>
+</html>

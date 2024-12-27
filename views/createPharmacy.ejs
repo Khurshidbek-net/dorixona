@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Pharmacy</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5;
+        }
+        .container {
+            max-width: 500px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+            font-size: 24px;
+            margin-bottom: 20px;
+            color: #333;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #333;
+        }
+        .form-group input {
+            width: 95%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+        .submit-btn {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            font-weight: bold;
+            color: #fff;
+            background-color: #4caf66;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .submit-btn:hover {
+            background-color: #257b3c; 
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Yangi dorixona qo'shish</h1>
+        <form action="/api/pharmacies/add/pharmacy/<%= id %>" method="POST">
+            <div class="form-group">
+                <label for="pharmacy_name">Dorixona nomi</label>
+                <input type="text" autocomplete="off" id="pharmacy_name" name="name" placeholder="Enter pharmacy name" required>
+            </div>
+            <div class="form-group">
+                <label for="address">Manzili</label>
+                <input type="text" autocomplete="off" id="address" name="address" placeholder="Enter address" required>
+            </div>
+            <div class="form-group">
+                <label for="phone">Telefon raqami</label>
+                <input type="tel" autocomplete="off" id="phone" name="phone" placeholder="Enter phone number" required>
+            </div>
+            <div class="form-group">
+                <label for="phone">Email</label>
+                <input type="email" autocomplete="off" id="email" name="email" placeholder="Enter email" required>
+            </div>
+            <button type="submit" class="submit-btn">Saqlash</button>
+        </form>
+    </div>
+</body>
+</html>
