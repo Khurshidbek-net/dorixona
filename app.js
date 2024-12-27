@@ -24,5 +24,5 @@ app.get("/", (req, res) =>{
 
 app.use("/api", mainRouter);
 app.listen(PORT, () =>{
-    console.log("Server running: http://localhost:"+PORT)
+    console.log("Server running: http://45.138.158.154:"+PORT)
 });
